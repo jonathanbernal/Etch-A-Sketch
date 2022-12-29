@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font: 'Roboto', 'sans-serif', 'serif';
+    font-size: 12px;
+}
+
+.header {
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.app-container {
+    display: flex;
+}
+
+.grid-container {
+    margin-left: auto;
+}
+
+footer {
+    display: flex;
+    padding: 1em;
+    margin-top: auto;
+    background-color: #444;
+    color: #eee;
+    justify-content: center;
+}
