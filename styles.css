@@ -8,10 +8,6 @@ html {
     font-size: 12px;
 }
 
-.header {
-    text-align: center;
-}
-
 body {
     display: flex;
     flex-direction: column;
@@ -20,12 +16,29 @@ body {
 
 .app-container {
     display: flex;
+    flex-basis: 1200px;
+    align-items: stretch;
+}
+
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    padding: 2em;
 }
 
 .grid-container {
-    margin-left: auto;
+    background-color:#7f8274;
+    align-self: center;
+    margin: 0 auto;
 }
 
+.grid-container div {
+    background-color: #7f8274;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #ccc;
+}
 footer {
     display: flex;
     padding: 1em;
