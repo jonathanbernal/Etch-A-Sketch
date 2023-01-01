@@ -14,6 +14,26 @@
             <header>
                 <h1>Etch-A-Sketch</h1>
             </header>
+            <div class="controls-container ">
+                <label for="grid-slider" class="slider-label">
+                    Grid Size
+                    <input type="range" min="16" max="100" value="16" id="grid-slider" class="slider">
+                    <div class="slider-values">
+                        <span>16</span><span class="slider-value"></span><span>100</span>
+                    </div>
+                </label>
+                <fieldset>
+                    <legend>Other Color Features (Choose One)</legend>
+                    <div>
+                        <input type="radio" id="none" name="color-feature" value="none" checked>
+                        <label for="none">None</label>
+                        <input type="radio" id="random-color" name="color-feature" value="random-color">
+                        <label for="random-color">Random Color</label>
+                        <input type="radio" id="gradual-color" name="color-feature" value="random-color">
+                        <label for="gradual-color">Gradual Color</label>
+                    </div>
+                </fieldset>
+            </div>
         </div>
         <div class="grid-container"></div>
     </div>

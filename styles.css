@@ -25,6 +25,25 @@ body {
     flex-direction: column;
     background-color: lightblue;
     padding: 2em;
+    gap: 1em;
+}
+
+.slider-label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.slider {
+    display: flex;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.slider-values {
+    display: flex;
+    justify-content: space-between;
 }
 
 .grid-container {
@@ -39,6 +58,7 @@ body {
     height: 10px;
     border: 1px solid #ccc;
 }
+
 footer {
     display: flex;
     padding: 1em;
