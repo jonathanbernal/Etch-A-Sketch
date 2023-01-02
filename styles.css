@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
+
 * {
     padding: 0;
     margin: 0;
 }
 
 html {
-    font: 'Roboto', 'sans-serif', 'serif';
+    font-family: 'Prosto One', cursive;
     font-size: 12px;
+    background-color: #FD8A8A;
+    color: #fff;
 }
 
 body {
@@ -16,8 +20,6 @@ body {
 
 .app-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .header {
@@ -30,7 +32,6 @@ body {
 .side-menu {
     display: flex;
     flex-direction: column;
-    background-color: lightblue;
     padding: 2em;
     gap: 1em;
 }
@@ -64,6 +65,11 @@ body {
     background-color:#7f8274;
     align-self: center;
     margin: 0 auto;
+}
+
+.grid-item {
+    background-color: #fff;
+    border-style: 2px solid black;
 }
 
 .grid-container div {
