@@ -16,8 +16,15 @@ body {
 
 .app-container {
     display: flex;
-    flex-basis: 1200px;
-    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    font-size: 24px;
 }
 
 .side-menu {
@@ -26,6 +33,13 @@ body {
     background-color: lightblue;
     padding: 2em;
     gap: 1em;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 18px;
 }
 
 .slider-label {
