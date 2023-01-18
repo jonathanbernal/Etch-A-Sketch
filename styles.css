@@ -5,85 +5,54 @@
     margin: 0;
 }
 
-html {
-    font-family: 'Prosto One', cursive;
-    font-size: 12px;
-    background-color: #FD8A8A;
-    color: #fff;
-}
 
-body {
-    display: flex;
-    flex-direction: column;
+.body {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
     height: 100vh;
+    background-color: #f0fdfa;
+    color: #444;
 }
 
-.app-container {
-    display: flex;
-}
-
-.header {
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    font-size: 24px;
-}
-
-.side-menu {
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
-    gap: 1em;
-}
-
-.controls-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    font-size: 18px;
-}
-
-.slider-label {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    line-height: 1.5;
-}
-
-.slider {
-    display: flex;
-    justify-content: stretch;
-    width: 100%;
-}
-
-.slider-values {
-    display: flex;
-    justify-content: space-between;
+header {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-column: 1 / 4;
 }
 
 .grid-container {
-    background-color:#7f8274;
+    display: grid;
+    background-color: gray;
+    width: clamp(300px, 500px, 600px);
+    height: clamp(300px, 500px, 600px);
+    grid-template-columns: repeat(auto-fill, auto);
+    grid-template-rows: repeat(auto-fill, auto);
+    grid-auto-flow: column;
+    grid-column: 2 / 3;
+    box-sizing: border-box;
     align-self: center;
-    margin: 0 auto;
+    justify-self: center;
+    margin: 2em 0;
 }
 
-.grid-item {
-    background-color: #fff;
-    border-style: 2px solid black;
+.grid-tile {
+    background-color: #eee;
+    border: 1px solid black;
 }
 
-.grid-container div {
-    background-color: #7f8274;
-    width: 10px;
-    height: 10px;
-    border: 1px solid #ccc;
+.grid-tile:hover {
+    background-color: #777;
 }
 
-footer {
-    display: flex;
-    padding: 1em;
-    margin-top: auto;
-    background-color: #444;
-    color: #eee;
+.footer {
+    display: grid;
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
     justify-content: center;
+    align-content: center;
+    background-color: #777;
+    background-size: cover;
+    padding: 1em;
 }
