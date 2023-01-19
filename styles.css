@@ -9,7 +9,6 @@
 .body {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
     height: 100vh;
     background-color: #f0fdfa;
     color: #444;
@@ -20,6 +19,8 @@ header {
     justify-items: center;
     align-items: center;
     grid-column: 1 / 4;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
 }
 
 .grid-container {
@@ -27,23 +28,27 @@ header {
     background-color: gray;
     width: clamp(300px, 500px, 600px);
     height: clamp(300px, 500px, 600px);
-    grid-template-columns: repeat(auto-fill, auto);
-    grid-template-rows: repeat(auto-fill, auto);
+    max-width: 600px;
+    max-height: 600px;
+    grid-template-columns: repeat(auto-fill, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
     grid-auto-flow: column;
     grid-column: 2 / 3;
     box-sizing: border-box;
     align-self: center;
     justify-self: center;
-    margin: 2em 0;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
 }
 
 .grid-tile {
     background-color: #eee;
     border: 1px solid black;
+    box-sizing: border-box;
 }
 
 .grid-tile:hover {
-    background-color: #777;
+    background-color: black;
 }
 
 .footer {

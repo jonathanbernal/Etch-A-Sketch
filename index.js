@@ -21,8 +21,8 @@ function renderGrid(rows, cols){
     const rowSize = containerHeight / rows;
     const columnSize = containerWidth / cols;
 
-    gridContainer.style['grid-template-columns'] = `repeat(auto-fill, minmax(${columnSize}, 1fr))`;
-    gridContainer.style['grid-template-rows'] = `repeat(auto-fill, minmax(${rowSize}, 1fr))`;
+    // gridContainer.style['grid-template-columns'] = `repeat(auto-fill, minmax(${columnSize}, 1fr))`;
+    // gridContainer.style['grid-template-rows'] = `repeat(auto-fill, minmax(${rowSize}, 1fr))`;
 
     for (let row = 0; row < rows; row++){
         let gridRow = document.createElement('div');
@@ -39,4 +39,4 @@ function renderGrid(rows, cols){
     }
 }
 
-renderGrid(30, 30);
+renderGrid(16, 16);
