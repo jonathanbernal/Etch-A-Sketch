@@ -6,23 +6,37 @@ const gridContainer = document.querySelector('.grid-container');
 const DEFAULT_GRID_ITEMS = 16; // This creates a default 16 x 16 grid
 
 /**
+ * This function gets rid of all the children that are attached to a grid
+ * when calling renderGrid(). It is used to update the grid when the grid
+ * size changes.
+ */
+function wipeGrid() {
+    while(gridContainer.firstChild){
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+}
+
+/**
  *  This function renders a grid on the main page. It resizes itself
  *  based on the number of rows and columns.
  * 
  *  We're always creating a NxN grid, hence the number of columns will be the
  *  same as that of rows.
  * 
- * @param {Integer} rows the number of rows/columns to generate
+ * @param {Integer} rows the number of rows to generate
+ * @param {Integer} cols the number of columns to generate
  */
 function renderGrid(rows, cols){
 
+    // Calculate the dimensions of the container and cells based on different screen sizes
     const containerWidth = gridContainer.clientWidth;
     const containerHeight = gridContainer.clientHeight;
     const rowSize = containerHeight / rows;
     const columnSize = containerWidth / cols;
 
-    // gridContainer.style['grid-template-columns'] = `repeat(auto-fill, minmax(${columnSize}, 1fr))`;
-    // gridContainer.style['grid-template-rows'] = `repeat(auto-fill, minmax(${rowSize}, 1fr))`;
+    // we need to wipe the previous grid first or else every time we render
+    // a new grid, it will just add up right next to the previous one.
+    wipeGrid();
 
     for (let row = 0; row < rows; row++){
         let gridRow = document.createElement('div');
@@ -39,20 +53,20 @@ function renderGrid(rows, cols){
     }
 }
 
-/**
- * This function gets rid of all the children that are attached to a grid
- * when calling renderGrid(). It is used to update the grid when the grid
- * size changes.
- */
-function wipeGrid() {
-    
-}
-
 gridSlider.addEventListener('input', (evt) => {
     const gridSizeValue = evt.target.value;
     gridValue.textContent = gridSizeValue;
+
     renderGrid(gridSizeValue, gridSizeValue);
 });
+
+function initWebPage() {
+    // Call out renderGrid() to initiate the grid on page load.
+    gridValue.textContent = DEFAULT_GRID_ITEMS;
+    renderGrid(DEFAULT_GRID_ITEMS, DEFAULT_GRID_ITEMS);
+}
+
+initWebPage();
 
 /*
  TODO: find out how to delete children of a node without referencing them directly.
