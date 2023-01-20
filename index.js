@@ -2,6 +2,7 @@ const sliderValue = document.querySelector('.slider-value');
 const gridSlider = document.querySelector('#grid-slider');
 const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
+const gridCell = document.querySelector('')
 
 const DEFAULT_GRID_ITEMS = 16; // This creates a default 16 x 16 grid
 
@@ -43,7 +44,7 @@ function renderGrid(rows, cols){
 
         for (let col = 0; col < cols; col++) {
             let gridCol = document.createElement('div');
-            gridCol.classList.add('grid-tile');
+            gridCol.classList.add('grid-cell');
             gridCol.style.width = `${columnSize}px`;
             gridCol.style.height = `${rowSize}px`;
             gridRow.appendChild(gridCol);

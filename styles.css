@@ -65,13 +65,13 @@ header {
     margin-bottom: 1em;
 }
 
-.grid-tile {
+.grid-cell {
     background-color: #eee;
     border: 1px solid black;
     box-sizing: border-box;
 }
 
-.grid-tile:hover {
+.grid-cell:hover {
     background-color: black;
 }
 
