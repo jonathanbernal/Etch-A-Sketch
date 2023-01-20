@@ -23,6 +23,30 @@ header {
     padding-bottom: 0.5em;
 }
 
+.controls-container {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.controls-label {
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    border-radius: 5px;
+    line-height: 1.5;
+    padding: 0.5em;
+}
+
+.label-title {
+    text-align: center;
+}
+
+.range-values {
+    display: flex;
+    justify-content: space-between;
+}
+
 .grid-container {
     display: grid;
     background-color: gray;

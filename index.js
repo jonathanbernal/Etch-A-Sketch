@@ -1,9 +1,9 @@
 const sliderValue = document.querySelector('.slider-value');
 const gridSlider = document.querySelector('#grid-slider');
+const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
 
 const DEFAULT_GRID_ITEMS = 16; // This creates a default 16 x 16 grid
-
 
 /**
  *  This function renders a grid on the main page. It resizes itself
@@ -39,4 +39,26 @@ function renderGrid(rows, cols){
     }
 }
 
-renderGrid(16, 16);
+/**
+ * This function gets rid of all the children that are attached to a grid
+ * when calling renderGrid(). It is used to update the grid when the grid
+ * size changes.
+ */
+function wipeGrid() {
+    
+}
+
+gridSlider.addEventListener('input', (evt) => {
+    const gridSizeValue = evt.target.value;
+    gridValue.textContent = gridSizeValue;
+    renderGrid(gridSizeValue, gridSizeValue);
+});
+
+/*
+ TODO: find out how to delete children of a node without referencing them directly.
+ Can we create a single child node for the grid container and just delete it to 
+ render a new grid?
+ We need to wipe the grid somehow or change the size of the existing items and delete
+ the ones we don't need. What could be more efficient in terms of performance?
+ If we could keep a linear algorithm, we could do this by deleting any exceeding items
+*/
