@@ -25,8 +25,9 @@ header {
 
 .controls-container {
     display: flex;
-    align-items: flex-end;
     flex-direction: column;
+    justify-items: center;
+    align-content: flex-end;
 }
 
 .controls-label {
@@ -45,6 +46,10 @@ header {
 .range-values {
     display: flex;
     justify-content: space-between;
+}
+
+#color-picker-label {
+    flex-direction: row;
 }
 
 .grid-container {
@@ -69,10 +74,6 @@ header {
     background-color: #eee;
     border: 1px solid black;
     box-sizing: border-box;
-}
-
-.grid-cell:hover {
-    background-color: black;
 }
 
 .footer {

@@ -13,6 +13,7 @@
         <h1>Etch-A-Sketch</h1>
     </header>
     <div class="controls-container">
+        <!-- grid slider -->
         <label for="#grid-slider" class="controls-label">
             <p class="label-title">Grid Size</p>
             <input type="range" min="16" max="100" value="16" id="grid-slider"/>
@@ -22,6 +23,16 @@
                 <div>100</div>
             </div>
         </label>
+
+        <!-- color picker -->
+        <label for="#color-picker" id="color-picker-label">
+            <p>Color</p>
+            <input type="color" value="#f00" id="color-picker">
+        </label>
+
+        <!-- clear button -->
+        <button id="clear-button">Clear</button>
+            
     </div>
     <div class="grid-container"></div>
     <footer class="footer">

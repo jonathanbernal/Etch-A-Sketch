@@ -2,9 +2,14 @@ const sliderValue = document.querySelector('.slider-value');
 const gridSlider = document.querySelector('#grid-slider');
 const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
-const gridCell = document.querySelector('')
+const gridCell = document.querySelectorAll('.grid-cell');
+const colorPicker = document.querySelector('#color-picker');
+const clearButton = document.querySelector('#clear-button');
 
-const DEFAULT_GRID_ITEMS = 16; // This creates a default 16 x 16 grid
+const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
+const DEFAULT_CELL_COLOR = 'black';
+let currentCellColor = '';
+let currentGridSize = 0;
 
 /**
  * This function gets rid of all the children that are attached to a grid
@@ -47,6 +52,7 @@ function renderGrid(rows, cols){
             gridCol.classList.add('grid-cell');
             gridCol.style.width = `${columnSize}px`;
             gridCol.style.height = `${rowSize}px`;
+
             gridRow.appendChild(gridCol);
         }
 
@@ -54,17 +60,31 @@ function renderGrid(rows, cols){
     }
 }
 
-gridSlider.addEventListener('input', (evt) => {
-    const gridSizeValue = evt.target.value;
-    gridValue.textContent = gridSizeValue;
+gridContainer.addEventListener('mouseover', (evt) => {
+    evt.target.style.backgroundColor = currentCellColor;
+});
 
-    renderGrid(gridSizeValue, gridSizeValue);
+gridSlider.addEventListener('input', (evt) => {
+    currentGridSize = evt.target.value;
+    gridValue.textContent = currentGridSize;
+
+    renderGrid(currentGridSize, currentGridSize);
+});
+
+colorPicker.addEventListener('input', (evt) => {
+    currentCellColor = evt.target.value;
+});
+
+clearButton.addEventListener('click', () => {
+    renderGrid(currentGridSize, currentGridSize);
 });
 
 function initWebPage() {
     // Call out renderGrid() to initiate the grid on page load.
-    gridValue.textContent = DEFAULT_GRID_ITEMS;
-    renderGrid(DEFAULT_GRID_ITEMS, DEFAULT_GRID_ITEMS);
+    currentGridSize = DEFAULT_GRID_SIZE;
+    currentCellColor = DEFAULT_CELL_COLOR;
+    gridValue.textContent = DEFAULT_GRID_SIZE;
+    renderGrid(currentGridSize, currentGridSize);
 }
 
 initWebPage();
