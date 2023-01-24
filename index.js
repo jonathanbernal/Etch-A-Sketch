@@ -4,12 +4,21 @@ const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
 const gridCell = document.querySelectorAll('.grid-cell');
 const colorPicker = document.querySelector('#color-picker');
+
+const toggleGridButton = document.querySelector('#toggle-grid-button');
 const clearButton = document.querySelector('#clear-button');
+const eraseButton = document.querySelector('#eraser-button');
 
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
 const DEFAULT_CELL_COLOR = 'black';
-let currentCellColor = '';
+const DEFAULT_BACKGROUND_COLOR = '#eee';
+const DEFAULT_GRID_CELL_BORDER = '1px solid black';
+
+let currentCellColor = ''; // this keeps track of the current color
+let previousCellColor = ''; // this variable is used to return to the previous color when the user uses the eraser feature
 let currentGridSize = 0;
+let currentBackgroundColor = '';
+let currentGridCellBorder = '';
 
 /**
  * This function gets rid of all the children that are attached to a grid
@@ -52,6 +61,7 @@ function renderGrid(rows, cols){
             gridCol.classList.add('grid-cell');
             gridCol.style.width = `${columnSize}px`;
             gridCol.style.height = `${rowSize}px`;
+            gridCol.style.border = currentGridCellBorder;
 
             gridRow.appendChild(gridCol);
         }
@@ -75,14 +85,55 @@ colorPicker.addEventListener('input', (evt) => {
     currentCellColor = evt.target.value;
 });
 
-clearButton.addEventListener('click', () => {
-    renderGrid(currentGridSize, currentGridSize);
+eraseButton.addEventListener('click', function(evt){
+    // erasing the contents of a cell will always turn the color into the
+    // current background color
+    if (this.value === 'off'){
+        this.value = 'on';
+        previousCellColor = currentCellColor;
+        currentCellColor = currentBackgroundColor;
+    }
+    else {
+        this.value = 'off';
+        currentCellColor = colorPicker.value;
+    }
 });
 
+/** 
+ * This event listener is responsible for clearing out the grid when the
+ * clear button is pressed.
+*/
+clearButton.addEventListener('click', () => {
+    renderGrid(currentGridSize, currentGridSize); 
+});
+
+toggleGridButton.addEventListener('click', function(){
+    let gridCells = gridContainer.querySelectorAll('.grid-cell');
+
+    if( this.value == 'on'){
+        this.value = 'off';
+        currentGridCellBorder = 'none';
+    }
+    else {
+        this.value = 'on';
+        currentGridCellBorder = DEFAULT_GRID_CELL_BORDER;
+    }
+    // once the current style is determined, re-render the grid
+    gridCells.forEach(item => {item.style.border = currentGridCellBorder});
+});
+
+/**
+ * This function initializes the contents of the Web page on loadup.
+ * Another alternative to this function could be to load all the initial
+ * values on window.load
+ */
 function initWebPage() {
     // Call out renderGrid() to initiate the grid on page load.
     currentGridSize = DEFAULT_GRID_SIZE;
     currentCellColor = DEFAULT_CELL_COLOR;
+    currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
+    currentGridCellBorder = DEFAULT_GRID_CELL_BORDER;
+
     gridValue.textContent = DEFAULT_GRID_SIZE;
     renderGrid(currentGridSize, currentGridSize);
 }

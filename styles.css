@@ -72,8 +72,8 @@ header {
 
 .grid-cell {
     background-color: #eee;
-    border: 1px solid black;
     box-sizing: border-box;
+    border: 1px solid black; /* default border */
 }
 
 .footer {
