@@ -82,6 +82,11 @@ gridSlider.addEventListener('input', (evt) => {
 });
 
 colorPicker.addEventListener('input', (evt) => {
+    // this makes sure that if the eraser is activated and the user picks up
+    // a new color, the eraser is turned off and the current color updated
+    if (eraseButton.value === 'on'){
+        eraseButton.value = 'off';
+    }
     currentCellColor = evt.target.value;
 });
 
