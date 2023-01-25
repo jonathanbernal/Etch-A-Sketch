@@ -4,6 +4,7 @@ const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
 const gridCell = document.querySelectorAll('.grid-cell');
 const colorPicker = document.querySelector('#color-picker');
+const backgroundColorPicker = document.querySelector('#background-picker');
 
 const toggleGridButton = document.querySelector('#toggle-grid-button');
 const clearButton = document.querySelector('#clear-button');
@@ -11,7 +12,7 @@ const eraseButton = document.querySelector('#eraser-button');
 
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
 const DEFAULT_CELL_COLOR = 'black';
-const DEFAULT_BACKGROUND_COLOR = '#eee';
+const DEFAULT_BACKGROUND_COLOR = '#eeeeee';
 const DEFAULT_GRID_CELL_BORDER = '1px solid black';
 
 let currentCellColor = ''; // this keeps track of the current color
@@ -62,7 +63,8 @@ function renderGrid(rows, cols){
             gridCol.style.width = `${columnSize}px`;
             gridCol.style.height = `${rowSize}px`;
             gridCol.style.border = currentGridCellBorder;
-
+            gridCol.style.backgroundColor = currentBackgroundColor;
+            gridCol.setAttribute('hovered', false);
             gridRow.appendChild(gridCol);
         }
 
@@ -70,10 +72,24 @@ function renderGrid(rows, cols){
     }
 }
 
+/**
+ * This event listener is responsible for the behavior of each cell
+ * on the grid. It is responsible for painting each cell on the grid
+ * when hovered.
+ */
 gridContainer.addEventListener('mouseover', (evt) => {
+    // This helps us keep track of the cells the user has painted on (hovered).
+    // We do this in order to change the background color of the grid and not
+    // confuse the cells with the ones the user has hovered on.
+    evt.target.setAttribute('hovered', true);
+    // paint the cell with the color specified by the user.
     evt.target.style.backgroundColor = currentCellColor;
 });
 
+/**
+ * This event listener grabs the value from the grid slider
+ * and renders a new grid with the specified size when it changes.
+ */
 gridSlider.addEventListener('input', (evt) => {
     currentGridSize = evt.target.value;
     gridValue.textContent = currentGridSize;
@@ -81,15 +97,38 @@ gridSlider.addEventListener('input', (evt) => {
     renderGrid(currentGridSize, currentGridSize);
 });
 
+/**
+ * This event listener is responsible for setting the painting color.
+ */
 colorPicker.addEventListener('input', (evt) => {
     // this makes sure that if the eraser is activated and the user picks up
     // a new color, the eraser is turned off and the current color updated
     if (eraseButton.value === 'on'){
         eraseButton.value = 'off';
     }
+    // set the color to the value specified on the button.
     currentCellColor = evt.target.value;
 });
 
+/**
+ * This event listener is responsible for changing the background color of the
+ * grid to the color specified by the user.
+ */
+backgroundColorPicker.addEventListener('input', ()=>{
+    currentBackgroundColor = backgroundColorPicker.value;
+    let gridCells = gridContainer.querySelectorAll('.grid-cell');
+    gridCells.forEach(cell => {
+        if(cell.getAttribute('hovered') === 'false')
+            cell.style.backgroundColor = backgroundColorPicker.value;
+    });
+});
+
+/**
+ * This event listener is responsible for toggling the eraser on and off
+ * as well as keeping track of the previous color, so that when the eraser
+ * is toggled off, the user can keep drawing with the previously selected
+ * color.
+ */
 eraseButton.addEventListener('click', function(evt){
     // erasing the contents of a cell will always turn the color into the
     // current background color
@@ -109,13 +148,25 @@ eraseButton.addEventListener('click', function(evt){
  * clear button is pressed.
 */
 clearButton.addEventListener('click', () => {
+    // restore default values
+    backgroundColorPicker.value = DEFAULT_BACKGROUND_COLOR;
+    currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
+    // toggle the eraser off if it's on
+    if (eraseButton.value === 'on'){
+        eraseButton.value = 'off';
+        currentCellColor = colorPicker.value;
+    }
+
     renderGrid(currentGridSize, currentGridSize); 
 });
 
+/**
+ * This event listener toggles the lines on the grid on and off.
+ */
 toggleGridButton.addEventListener('click', function(){
     let gridCells = gridContainer.querySelectorAll('.grid-cell');
 
-    if( this.value == 'on'){
+    if( this.value === 'on'){
         this.value = 'off';
         currentGridCellBorder = 'none';
     }
@@ -149,7 +200,4 @@ initWebPage();
  TODO: find out how to delete children of a node without referencing them directly.
  Can we create a single child node for the grid container and just delete it to 
  render a new grid?
- We need to wipe the grid somehow or change the size of the existing items and delete
- the ones we don't need. What could be more efficient in terms of performance?
- If we could keep a linear algorithm, we could do this by deleting any exceeding items
 */
