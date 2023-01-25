@@ -79,10 +79,17 @@ function renderGrid(rows, cols){
  */
 gridContainer.addEventListener('mouseover', (evt) => {
     // This helps us keep track of the cells the user has painted on (hovered).
-    // We do this in order to change the background color of the grid and not
-    // confuse the cells with the ones the user has hovered on.
-    evt.target.setAttribute('hovered', true);
-    // paint the cell with the color specified by the user.
+    // and the ones that are to be erased. This way, we can easily update
+    // the background color whenever needed.
+    if (eraseButton.value === 'on'){
+        evt.target.setAttribute('hovered', false);
+    }
+    else {
+        evt.target.setAttribute('hovered', true);
+    }
+    // paint the cell with the color specified by the user unless the eraser is on
+    // If so, the current background color is used to change the cell color to that 
+    // of the background.
     evt.target.style.backgroundColor = currentCellColor;
 });
 
@@ -189,7 +196,6 @@ function initWebPage() {
     currentCellColor = DEFAULT_CELL_COLOR;
     currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
     currentGridCellBorder = DEFAULT_GRID_CELL_BORDER;
-
     gridValue.textContent = DEFAULT_GRID_SIZE;
     renderGrid(currentGridSize, currentGridSize);
 }
