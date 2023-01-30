@@ -6,10 +6,13 @@ const gridCell = document.querySelectorAll('.grid-cell');
 const colorPicker = document.querySelector('#color-picker');
 const backgroundColorPicker = document.querySelector('#background-picker');
 
+const colorModeButton = document.querySelector('#color-button');
 const rainbowModeButton = document.querySelector('#rainbow-button');
 const toggleGridButton = document.querySelector('#toggle-grid-button');
 const clearButton = document.querySelector('#clear-button');
 const eraseButton = document.querySelector('#eraser-button');
+// get a reference to all the buttons to manage their state through the active class
+const buttons = document.querySelectorAll('.mode-btn');
 
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
 const DEFAULT_CELL_COLOR = '#000000';
@@ -125,11 +128,30 @@ function drawRainbowColor(event){
 }
 
 /**
- * This event listener is responsible for the behavior of each cell
- * on the grid. It is responsible for painting each cell on the grid
- * when hovered.
+ * This function erases the color of a cell
  */
-gridContainer.addEventListener('mouseover', drawSolidColor, { signal: abortController.signal });
+function eraseColor(event){
+        event.target.style.backgroundColor = currentBackgroundColor;
+        event.target.setAttribute('hovered', 'false');
+}
+
+/**
+ * This event listener grabs a reference to all the buttons that have
+ * a mode -- color, rainbow, and eraser. It then manages their state
+ * through the active class.
+ * 
+ * The reason this event listener was included was because managing
+ * the references to each of the buttons was becoming more difficult,
+ * and this is the only workaround to not have rainbow mode conflict with
+ * the eraser.
+ */
+buttons.forEach(button => {
+    button.addEventListener('click', function() {
+        const current = document.querySelector('.active');
+        current.classList.remove('active');
+        this.classList.add('active');
+    });
+});
 
 /**
  * This event listener grabs the value from the grid slider
@@ -168,74 +190,38 @@ backgroundColorPicker.addEventListener('input', ()=>{
     });
 });
 
-/**
- * This event handler is responsible for triggering the rainbow mode. This mode
- * generates a random color and uses it to paint on the grid.
- */
-rainbowModeButton.addEventListener('click', function(){
-    if (eraseButton.value === 'on'){
-        eraseButton.value = 'off';
-    }
-    // check for the rainbow button's values
-    if (this.value === 'on'){
-        this.value = 'off';
-        // I had to resort to using an AbortController and synthetic events
-        // because removeListener() was not removing the event handler. This is because
-        // addEventListener and removeEventListener use copies of the event handlers
-        // but not the handlers themselves
-        abortController.abort();
-        const abortEvent = new Event('abort');
-        this.dispatchEvent(abortEvent);
-    }
-    else {
-        this.value = 'on';
-        // this removes all the event listeners associated with the grid, which
-        // are then reattached on the abort event handler
-        abortController.abort(); 
-        const abortEvent = new Event('abort');
-        this.dispatchEvent(abortEvent);
-    }
-});
-
-/**
- * TODO: we need to make a variable for the current active mode. We will need to define the color
- * mode. This could be done by giving the color control a value that changes when a color is selected.
- * When the eraser or rainbow mode are selected, we need to somehow turn off the other buttons and have
- * one enabled at a time.
- */
-rainbowModeButton.addEventListener('abort', ()=> {
-    console.log('rainbow aborted');
-    // since an abort signal cannot be reused, we need to create a new instance of an abort controller
-    // so that the grid can abort any future avents attached to it.
+colorModeButton.addEventListener('click', function(){
+    abortController.abort();
     abortController = new AbortController();
-
-    if (rainbowModeButton.value === 'on'){
-        gridContainer.addEventListener('mouseover', drawRainbowColor, {signal: abortController.signal});
-    }
-    else {
-        gridContainer.addEventListener('mouseover', drawSolidColor, {signal: abortController.signal});
-    }
-    
+    const abortEvent = new Event('abort');
+    this.dispatchEvent(abortEvent);
 });
 
-/**
- * This event listener is responsible for toggling the eraser on and off
- * as well as keeping track of the previous color, so that when the eraser
- * is toggled off, the user can keep drawing with the previously selected
- * color.
- */
-eraseButton.addEventListener('click', function(evt){
-    // erasing the contents of a cell will always turn the color into the
-    // current background color
-    if (this.value === 'off'){
-        this.value = 'on';
-        previousCellColor = currentCellColor;
-        currentCellColor = currentBackgroundColor;
-    }
-    else {
-        this.value = 'off';
-        currentCellColor = colorPicker.value;
-    }
+colorModeButton.addEventListener('abort', ()=>{
+    console.log('Color Mode activated');
+    gridContainer.addEventListener('mouseover', drawSolidColor, { signal: abortController.signal });
+});
+
+rainbowModeButton.addEventListener('click', function(){
+    abortController.abort();
+    abortController = new AbortController();
+    const abortEvent = new Event('abort');
+    this.dispatchEvent(abortEvent);
+});
+
+rainbowModeButton.addEventListener('abort', ()=>{
+    gridContainer.addEventListener('mouseover', drawRainbowColor, { signal: abortController.signal });
+});
+
+eraseButton.addEventListener('click', function(){
+    abortController.abort();
+    abortController = new AbortController();
+    const abortEvent = new Event('abort');
+    this.dispatchEvent(abortEvent);
+});
+
+eraseButton.addEventListener('abort', ()=>{
+    gridContainer.addEventListener('mouseover', eraseColor, { signal: abortController.signal });
 });
 
 /** 
@@ -243,14 +229,9 @@ eraseButton.addEventListener('click', function(evt){
  * clear button is pressed.
 */
 clearButton.addEventListener('click', () => {
-    // restore default values
+    // restore default values for the background
     backgroundColorPicker.value = DEFAULT_BACKGROUND_COLOR;
     currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
-    // toggle the eraser off if it's on
-    if (eraseButton.value === 'on'){
-        eraseButton.value = 'off';
-        currentCellColor = colorPicker.value;
-    }
 
     renderGrid(currentGridSize, currentGridSize); 
 });
