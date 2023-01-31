@@ -10,11 +10,10 @@
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     height: 100vh;
-    background-color: #f0fdfa;
-    color: #444;
+    background-color: #777;
 }
 
-button[value="on"]{
+.active {
     background-color: #aaa;
 }
 
@@ -72,6 +71,7 @@ header {
     justify-self: center;
     margin-top: 0.5em;
     margin-bottom: 1em;
+    border-radius: 10em;
 }
 
 .grid-cell {

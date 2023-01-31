@@ -12,7 +12,7 @@ const toggleGridButton = document.querySelector('#toggle-grid-button');
 const clearButton = document.querySelector('#clear-button');
 const eraseButton = document.querySelector('#eraser-button');
 // get a reference to all the buttons to manage their state through the active class
-const buttons = document.querySelectorAll('.mode-btn');
+const modeButtons = document.querySelectorAll('.mode-btn');
 
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
 const DEFAULT_CELL_COLOR = '#000000';
@@ -141,11 +141,17 @@ function eraseColor(event){
  * and this is the only workaround to not have rainbow mode and eraser mode
  * conflict with one another.
  */
-buttons.forEach(button => {
+modeButtons.forEach(button => {
     button.addEventListener('click', function() {
         const current = document.querySelector('.active');
-        current.classList.remove('active');
-        this.classList.add('active');
+        if (current){
+            current.classList.remove('active');
+            this.classList.add('active');
+        }
+        // This handles the initial case when none of the mode buttons is active.
+        else {
+            this.classList.add('active');
+        }
     });
 });
 
@@ -254,7 +260,7 @@ toggleGridButton.addEventListener('click', function(){
 
     // We still want to keep track of the value of this button
     // to know when the grid lines are on or off
-    if( this.value === 'on'){
+    if (this.value === 'on'){
         this.value = 'off';
         currentGridCellBorder = 'none';
     }
@@ -263,7 +269,7 @@ toggleGridButton.addEventListener('click', function(){
         currentGridCellBorder = DEFAULT_GRID_CELL_BORDER;
     }
     // once the current style is determined, grab the current cells and change their border style.
-    gridCells.forEach(item => {item.style.border = currentGridCellBorder});
+    gridCells.forEach(item => { item.style.border = currentGridCellBorder });
 }); 
 
 /**
@@ -276,7 +282,7 @@ function initWebPage() {
     currentGridSize = DEFAULT_GRID_SIZE;
     currentCellColor = DEFAULT_CELL_COLOR;
     currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
-    currentGridCellBorder = DEFAULT_GRID_CELL_BORDER;
+    currentGridCellBorder = 'none';
     gridValue.textContent = DEFAULT_GRID_SIZE;
     renderGrid(currentGridSize, currentGridSize);
 }
