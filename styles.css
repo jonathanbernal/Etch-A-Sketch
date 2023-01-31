@@ -13,10 +13,6 @@
     background-color: #777;
 }
 
-.active {
-    background-color: #aaa;
-}
-
 header {
     display: grid;
     justify-items: center;
@@ -40,6 +36,16 @@ header {
     border-radius: 5px;
     line-height: 1.5;
     padding: 0.5em;
+}
+
+/* Indicates when a mode button is the current active mode */
+.active {
+    background-color: #aaa;
+}
+
+/* Handles the toggle mode and all possible toggable buttons in the future */
+button[value="on"] {
+    background-color: #aaa;
 }
 
 .label-title {
