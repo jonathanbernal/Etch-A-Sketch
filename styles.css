@@ -5,47 +5,50 @@
     margin: 0;
 }
 
-
 .body {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    background: url('https://cdn.pixabay.com/photo/2012/11/01/02/13/glacier-bay-63727_960_720.jpg');
+    background-size: cover;
     height: 100vh;
-    background-color: #777;
 }
 
 header {
     display: grid;
+    grid-column: 1 / 3;
     justify-items: center;
     align-items: center;
-    grid-column: 1 / 4;
     padding-top: 1em;
     padding-bottom: 0.5em;
 }
 
 .controls-container {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-content: flex-end;
+    grid-column: 1 / 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(20px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
+    width: clamp(200px, 250px, 300px);
+    height: clamp(200px, 500px, 600px);
+    gap: 5px;
+    place-self: center;
 }
 
 .controls-label {
     display: flex;
     flex-direction: column;
     background-color: lightblue;
-    border-radius: 5px;
+    border-radius: 10px;
     line-height: 1.5;
     padding: 0.5em;
 }
 
-/* Indicates when a mode button is the current active mode */
-.active {
-    background-color: #aaa;
+#color-picker-label {
+    flex-direction: row;
 }
 
-/* Handles the toggle mode and all possible toggable buttons in the future */
-button[value="on"] {
-    background-color: #aaa;
+#grid-slider-label {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
 }
 
 .label-title {
@@ -57,8 +60,26 @@ button[value="on"] {
     justify-content: space-between;
 }
 
-#color-picker-label {
-    flex-direction: row;
+button {
+    border-radius: 0.5em;
+    border-style: none;
+    font-size: 20px;
+    transition: scale 1.5s, background-color 1s;
+}
+
+button:hover {
+    background-color: #aaa;
+    color: #eee;
+    scale: 1.02;
+}
+
+/* Indicates when a mode button is the current active mode */
+.active {
+    background-color: #888;
+}
+
+#clear-button {
+    grid-column: 1 / 3;
 }
 
 .grid-container {
@@ -77,7 +98,6 @@ button[value="on"] {
     justify-self: center;
     margin-top: 0.5em;
     margin-bottom: 1em;
-    border-radius: 10em;
 }
 
 .grid-cell {
@@ -88,11 +108,40 @@ button[value="on"] {
 
 .footer {
     display: grid;
-    grid-column: 1 / 4;
-    grid-row: 3 / 4;
+    grid-column: 1 / 3;
     justify-content: center;
     align-content: center;
-    background-color: #777;
-    background-size: cover;
     padding: 1em;
+    color: #ddd;
+    font-size: 20px;
 }
+
+a {
+    text-decoration: none;
+    transition: font-size 1s;
+}
+
+a:hover {
+    font-size: 36px;
+}
+
+a:visited {
+    color: black;
+}
+
+/* Do not delete this commented code. It will be used with media queries for mobile devices */
+
+/* Handles the toggle mode and all possible toggable buttons in the future */
+/*
+button[value="on"] {
+    background-color: #aaa;
+}
+*/
+
+/* This is needed so that the togglable buttons can be seen on mobile */
+/*
+button[value="off"] {
+    background-color: #eee;
+    color: black;
+}
+*/

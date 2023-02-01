@@ -17,7 +17,7 @@ const modeButtons = document.querySelectorAll('.mode-btn');
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
 const DEFAULT_CELL_COLOR = '#000000';
 const DEFAULT_BACKGROUND_COLOR = '#eeeeee';
-const DEFAULT_GRID_CELL_BORDER = '1px solid black';
+const DEFAULT_GRID_CELL_BORDER = '1px solid #bbb';
 
 let currentCellColor = ''; // this keeps track of the current color
 let currentGridSize = 0;

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch A Sketch</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://kit.fontawesome.com/29cf700e75.js" crossorigin="anonymous" defer></script>
     <script type="text/javascript" src="index.js" defer></script>
+    
 </head>
 <body class="body">
     <header>
@@ -14,7 +16,7 @@
     </header>
     <div class="controls-container">
         <!-- grid slider -->
-        <label for="#grid-slider" class="controls-label">
+        <label for="#grid-slider" class="controls-label" id="grid-slider-label">
             <p class="label-title">Grid Size</p>
             <input type="range" min="16" max="100" value="16" id="grid-slider"/>
             <div class="range-values">
@@ -37,24 +39,26 @@
         </label>
 
         <!-- color mode is active by default-->
-        <button id="color-button" class="mode-btn">Color Mode</button>
+        <button id="color-button" class="mode-btn"><i class="fa-solid fa-paintbrush"></i></button>
 
         <!-- rainbow color picker-->
-        <button id="rainbow-button" class="mode-btn">Rainbow Mode</button>
+        <button id="rainbow-button" class="mode-btn"><i class="fa-solid fa-rainbow"></i></button>
 
         <!-- eraser -->
-        <button id="eraser-button" class="mode-btn">Eraser</button>
+        <button id="eraser-button" class="mode-btn"><i class="fa-solid fa-eraser"></i></button>
 
         <!-- toggle grid-->
-        <button id="toggle-grid-button" value="off">Toggle Grid</button>
+        <button id="toggle-grid-button" value="off"><i class="fa-sharp fa-solid fa-table-cells"></i></i></button>
 
         <!-- clear button -->
         <button id="clear-button">Clear</button>
             
     </div>
+
     <div class="grid-container"></div>
+
     <footer class="footer">
-        Copyright &copy; Jonathan Bernal 2023
+        <p>Truly Yours By Jonathan Bernal <a class="fa-brands fa-github" href="https://github.com/jonathanbernal" target="_blank"></a></p>
     </footer>
 </body>
 </html>
