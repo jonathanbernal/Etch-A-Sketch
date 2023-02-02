@@ -14,6 +14,7 @@
     <header>
         <h1>Etch-A-Sketch</h1>
     </header>
+    
     <div class="controls-container">
         <!-- grid slider -->
         <label for="#grid-slider" class="controls-label" id="grid-slider-label">
@@ -26,17 +27,21 @@
             </div>
         </label>
 
-        <!-- color picker -->
-        <label for="#color-picker" id="color-picker-label">
-            <p>Color</p>
-            <input type="color" value="#000000" id="color-picker">
-        </label>
+        <div class="color-container">
+            <p>Brush</p>
+             <!-- color picker -->
+            <label for="#color-picker" id="color-picker-label">
+                <input type="color" value="#000000" id="color-picker">
+            </label>
+        </div>
 
-        <!-- background color-->
-        <label for="background-picker" id="background-picker-label">
-            <p>Background Color</p>
-            <input type="color" value="#eeeeee" id="background-picker">
-        </label>
+        <div class="color-container">
+            <p>Background</p>
+            <!-- background color-->
+            <label for="background-picker" id="background-picker-label">
+                <input type="color" value="#eeeeee" id="background-picker">
+            </label>
+        </div>
 
         <!-- color mode is active by default-->
         <button id="color-button" class="mode-btn"><i class="fa-solid fa-paintbrush"></i></button>
@@ -56,6 +61,7 @@
     </div>
 
     <div class="grid-container"></div>
+    
 
     <footer class="footer">
         <p>Truly Yours By Jonathan Bernal <a class="fa-brands fa-github" href="https://github.com/jonathanbernal" target="_blank"></a></p>

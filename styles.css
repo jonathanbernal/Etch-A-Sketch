@@ -29,8 +29,10 @@ header {
     grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
     width: clamp(200px, 250px, 300px);
     height: clamp(200px, 500px, 600px);
-    gap: 5px;
-    place-self: center;
+    gap: 10px;
+    align-self: center;
+    justify-self: flex-end;
+    margin-right: 2em;
 }
 
 .controls-label {
@@ -42,8 +44,38 @@ header {
     padding: 0.5em;
 }
 
+.color-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    /*
+     * We use relative/absolute positioning to move the color picker dialog away from
+       the rounded label container.
+    */
+    position: relative;
+}
+
+#color-picker, #background-picker {
+    visibility: hidden;
+    position: absolute;
+    top: 9vh;
+    left: -50%;
+}
+
+#color-picker-label, #background-picker-label {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+}
+
 #color-picker-label {
-    flex-direction: row;
+    background-color: #000;
+}
+
+#background-picker-label {
+    background-color: #eee;
 }
 
 #grid-slider-label {
@@ -95,9 +127,8 @@ button:hover {
     grid-column: 2 / 3;
     box-sizing: border-box;
     align-self: center;
-    justify-self: center;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
+    justify-self: flex-start;
+    margin-left: 2em;
 }
 
 .grid-cell {

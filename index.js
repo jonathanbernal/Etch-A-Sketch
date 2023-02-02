@@ -3,15 +3,22 @@ const gridSlider = document.querySelector('#grid-slider');
 const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
 const gridCell = document.querySelectorAll('.grid-cell');
+
+// Color picker input
+const colorPickerLabel = document.querySelector('#color-picker-label');
 const colorPicker = document.querySelector('#color-picker');
+
+// Background color picker input
+const backgroundColorPickerLabel = document.querySelector('#background-picker-label');
 const backgroundColorPicker = document.querySelector('#background-picker');
 
+// Mode buttons
 const colorModeButton = document.querySelector('#color-button');
 const rainbowModeButton = document.querySelector('#rainbow-button');
 const toggleGridButton = document.querySelector('#toggle-grid-button');
 const clearButton = document.querySelector('#clear-button');
 const eraseButton = document.querySelector('#eraser-button');
-// get a reference to all the buttons to manage their state through the active class
+// Get a reference to all the buttons to manage their state through the active class
 const modeButtons = document.querySelectorAll('.mode-btn');
 
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
@@ -167,11 +174,32 @@ gridSlider.addEventListener('input', (evt) => {
 });
 
 /**
+ * This color picker label event listener is responsible for capturing the user's
+ * click and sending it to the input element that is hidden.
+ */
+colorPickerLabel.addEventListener('click', ()=>{
+    // Because we had to hide the color picker input to override its normal
+    // appearance, we need to emulate the click when clicking on the container
+    // label.
+    colorPicker.click();
+});
+
+/**
  * This event listener is responsible for setting the painting color.
  */
-colorPicker.addEventListener('input', (evt) => {
+colorPicker.addEventListener('input', (evt)=> {
     // set the color to the value specified on the button.
-    currentCellColor = evt.target.value;
+    const selectedColor = evt.target.value;
+    colorPickerLabel.style.backgroundColor = selectedColor;
+    currentCellColor = selectedColor;
+});
+
+/**
+ * This event listener simulates the clicking of the background color
+ * picker input.
+ */
+backgroundColorPickerLabel.addEventListener('click', ()=>{
+    backgroundColorPicker.click();
 });
 
 /**
@@ -179,13 +207,20 @@ colorPicker.addEventListener('input', (evt) => {
  * grid to the color specified by the user.
  */
 backgroundColorPicker.addEventListener('input', ()=>{
-    currentBackgroundColor = backgroundColorPicker.value;
+    const selectedColor = backgroundColorPicker.value;
+
+    currentBackgroundColor = selectedColor;
+    // Since we hid away the color input picker, we now have to change
+    // the color of the label container
+    backgroundColorPickerLabel.style.backgroundColor = selectedColor;
+
+    // Update the color of all cells that have not been hovered over
     let gridCells = gridContainer.querySelectorAll('.grid-cell');
     gridCells.forEach(cell => {
         // We must check against the contents of the value rather than the value itself
         // or the logic check is not evaluated.
         if(cell.getAttribute('hovered') === 'false')
-            cell.style.backgroundColor = backgroundColorPicker.value;
+            cell.style.backgroundColor = selectedColor;
     });
 });
 
