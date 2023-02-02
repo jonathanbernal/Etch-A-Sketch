@@ -7,7 +7,10 @@
 
 .body {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    /* We needed to add 1fr columns to the sides because the repeat hack was not centering
+       the controls and the grid container
+    */
+    grid-template-columns: 1fr repeat(auto-fit, minmax(400px, 1fr)) 1fr;
     background: url('https://cdn.pixabay.com/photo/2012/11/01/02/13/glacier-bay-63727_960_720.jpg');
     background-size: cover;
     height: 100vh;
@@ -15,7 +18,7 @@
 
 header {
     display: grid;
-    grid-column: 1 / 3;
+    grid-column: 1 / 5;
     justify-items: center;
     align-items: center;
     padding-top: 1em;
@@ -23,10 +26,10 @@ header {
 }
 
 .controls-container {
-    grid-column: 1 / 2;
     display: grid;
     grid-template-columns: repeat(2, minmax(20px, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
+    grid-column: 2 / 3;
     width: clamp(200px, 250px, 300px);
     height: clamp(200px, 500px, 600px);
     gap: 10px;
@@ -124,7 +127,6 @@ button:hover {
     grid-template-columns: repeat(auto-fill, 1fr);
     grid-template-rows: repeat(auto-fill, 1fr);
     grid-auto-flow: column;
-    grid-column: 2 / 3;
     box-sizing: border-box;
     align-self: center;
     justify-self: flex-start;
@@ -139,7 +141,7 @@ button:hover {
 
 .footer {
     display: grid;
-    grid-column: 1 / 3;
+    grid-column: 1 / 5;
     justify-content: center;
     align-content: center;
     padding: 1em;
