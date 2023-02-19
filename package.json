@@ -1,0 +1,34 @@
+{
+  "name": "etch-a-sketch",
+  "version": "1.0.0",
+  "description": "A sketching program you can draw on by hovering with your mouse.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanbernal/Etch-A-Sketch.git"
+  },
+  "keywords": [
+    "etch",
+    "sketch",
+    "etch-a-sketch",
+    "draw",
+    "drawing",
+    "theodinproject",
+    "odinproject",
+    "odin"
+  ],
+  "author": "Jonathan Bernal",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jonathanbernal/Etch-A-Sketch/issues"
+  },
+  "homepage": "https://github.com/jonathanbernal/Etch-A-Sketch#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
