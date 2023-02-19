@@ -1,180 +1,165 @@
-@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Prosto+One&display=swap");
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .body {
-    display: grid;
-    /* We needed to add 1fr columns to the sides because the repeat hack was not centering
+  display: grid;
+  /* We needed to add 1fr columns to the sides because the repeat hack was not centering
        the controls and the grid container
     */
-    grid-template-columns: 1fr repeat(auto-fit, minmax(400px, 1fr)) 1fr;
-    background: url('https://cdn.pixabay.com/photo/2012/11/01/02/13/glacier-bay-63727_960_720.jpg');
-    background-size: cover;
-    height: 100vh;
+  grid-template-columns: 1fr repeat(auto-fit, minmax(400px, 1fr)) 1fr;
+  background: url("https://cdn.pixabay.com/photo/2012/11/01/02/13/glacier-bay-63727_960_720.jpg");
+  background-size: cover;
+  height: 100vh;
 }
 
 header {
-    display: grid;
-    grid-column: 1 / 5;
-    justify-items: center;
-    align-items: center;
-    padding-top: 1em;
-    padding-bottom: 0.5em;
+  display: grid;
+  grid-column: 1 / 5;
+  justify-items: center;
+  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
 }
 
 .controls-container {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(20px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
-    grid-column: 2 / 3;
-    width: clamp(200px, 250px, 300px);
-    height: clamp(200px, 500px, 600px);
-    gap: 10px;
-    align-self: center;
-    justify-self: flex-end;
-    margin-right: 2em;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(20px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
+  grid-column: 2 / 3;
+  width: clamp(200px, 250px, 300px);
+  height: clamp(200px, 500px, 600px);
+  gap: 10px;
+  align-self: center;
+  justify-self: flex-end;
+  margin-right: 2em;
 }
 
 .controls-label {
-    display: flex;
-    flex-direction: column;
-    background-color: lightblue;
-    border-radius: 10px;
-    line-height: 1.5;
-    padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+  border-radius: 10px;
+  line-height: 1.5;
+  padding: 0.5em;
 }
 
 .color-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    font-weight: bold;
-    /*
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  /*
      * We use relative/absolute positioning to move the color picker dialog away from
        the rounded label container.
     */
-    position: relative;
+  position: relative;
 }
 
-#color-picker, #background-picker {
-    visibility: hidden;
-    position: absolute;
-    top: 9vh;
-    left: -50%;
+#color-picker,
+#background-picker {
+  visibility: hidden;
+  position: absolute;
+  top: 9vh;
+  left: -50%;
 }
 
-#color-picker-label, #background-picker-label {
-    width: 4em;
-    height: 4em;
-    border-radius: 50%;
+#color-picker-label,
+#background-picker-label {
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
 }
 
 #color-picker-label {
-    background-color: #000;
+  background-color: #000;
 }
 
 #background-picker-label {
-    background-color: #eee;
+  background-color: #eee;
 }
 
 #grid-slider-label {
-    grid-column: 1 / 3;
-    grid-row: 2 / 3;
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
 }
 
 .label-title {
-    text-align: center;
+  text-align: center;
 }
 
 .range-values {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 button {
-    border-radius: 0.5em;
-    border-style: none;
-    font-size: 20px;
-    transition: scale 1.5s, background-color 1s;
+  border-radius: 0.5em;
+  border-style: none;
+  font-size: 20px;
+  transition: scale 1.5s, background-color 1s;
 }
 
 button:hover {
-    background-color: #aaa;
-    color: #eee;
-    scale: 1.02;
+  background-color: #aaa;
+  color: #eee;
+  scale: 1.02;
 }
 
 /* Indicates when a mode button is the current active mode */
 .active {
-    background-color: #888;
+  background-color: #888;
 }
 
 #clear-button {
-    grid-column: 1 / 3;
+  grid-column: 1 / 3;
 }
 
 .grid-container {
-    display: grid;
-    background-color: gray;
-    width: clamp(300px, 500px, 600px);
-    height: clamp(300px, 500px, 600px);
-    max-width: 600px;
-    max-height: 600px;
-    grid-template-columns: repeat(auto-fill, 1fr);
-    grid-template-rows: repeat(auto-fill, 1fr);
-    grid-auto-flow: column;
-    box-sizing: border-box;
-    align-self: center;
-    justify-self: flex-start;
-    margin-left: 2em;
+  display: grid;
+  background-color: gray;
+  width: clamp(300px, 500px, 600px);
+  height: clamp(300px, 500px, 600px);
+  max-width: 600px;
+  max-height: 600px;
+  grid-template-columns: repeat(auto-fill, 1fr);
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-auto-flow: column;
+  box-sizing: border-box;
+  align-self: center;
+  justify-self: flex-start;
+  margin-left: 2em;
 }
 
 .grid-cell {
-    background-color: #eee;
-    box-sizing: border-box;
-    border: 1px solid black; /* default border */
+  background-color: #eee;
+  box-sizing: border-box;
+  border: 1px solid black; /* default border */
 }
 
 .footer {
-    display: grid;
-    grid-column: 1 / 5;
-    justify-content: center;
-    align-content: center;
-    padding: 1em;
-    color: #ddd;
-    font-size: 20px;
+  display: grid;
+  grid-column: 1 / 5;
+  justify-content: center;
+  align-content: center;
+  padding: 1em;
+  color: #ddd;
+  font-size: 20px;
 }
 
 a {
-    text-decoration: none;
-    transition: font-size 1s;
+  text-decoration: none;
+  transition: font-size 1s;
 }
 
 a:hover {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 a:visited {
-    color: black;
+  color: black;
 }
-
-/* Do not delete this commented code. It will be used with media queries for mobile devices */
-
-/* Handles the toggle mode and all possible toggable buttons in the future */
-/*
-button[value="on"] {
-    background-color: #aaa;
-}
-*/
-
-/* This is needed so that the togglable buttons can be seen on mobile */
-/*
-button[value="off"] {
-    background-color: #eee;
-    color: black;
-}
-*/
