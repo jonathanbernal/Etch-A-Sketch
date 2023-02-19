@@ -151,9 +151,7 @@ modeButtons.forEach((button) => {
     if (current) {
       current.classList.remove('active');
       this.classList.add('active');
-    }
-    // This handles the initial case when none of the mode buttons is active.
-    else {
+    } else { // This handles the initial case when none of the mode buttons is active.
       this.classList.add('active');
     }
   });
