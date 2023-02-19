@@ -68,10 +68,10 @@ function renderGrid(rows, cols) {
   // a new grid, it will just add up right next to the previous one.
   wipeGrid();
 
-  for (let row = 0; row < rows; row++) {
+  for (let row = 0; row < rows; row += 1) {
     const gridRow = document.createElement('div');
 
-    for (let col = 0; col < cols; col++) {
+    for (let col = 0; col < cols; col += 1) {
       const gridCol = document.createElement('div');
       gridCol.classList.add('grid-cell');
       gridCol.style.width = `${columnSize}px`;
@@ -96,7 +96,7 @@ function generateRandomHexColor() {
   // we will always be generating 6 values, as that is what the color picker
   // input will always expect. The color picker input does support neither 3-digit
   // values nor color names, such as 'red' or 'blue'.
-  for (let curr = 0; curr < 6; curr++) {
+  for (let curr = 0; curr < 6; curr += 1) {
     const randomValue = values[Math.floor(Math.random() * 16)];
     resultColor += randomValue;
   }
