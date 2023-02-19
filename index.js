@@ -2,7 +2,6 @@ const sliderValue = document.querySelector('.slider-value');
 const gridSlider = document.querySelector('#grid-slider');
 const gridValue = document.querySelector('.grid-value');
 const gridContainer = document.querySelector('.grid-container');
-const gridCell = document.querySelectorAll('.grid-cell');
 
 // Color picker input
 const colorPickerLabel = document.querySelector('#color-picker-label');
