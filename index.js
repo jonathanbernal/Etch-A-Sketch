@@ -1,33 +1,35 @@
-const gridSlider = document.querySelector('#grid-slider');
-const gridValue = document.querySelector('.grid-value');
-const gridContainer = document.querySelector('.grid-container');
+const gridSlider = document.querySelector("#grid-slider");
+const gridValue = document.querySelector(".grid-value");
+const gridContainer = document.querySelector(".grid-container");
 
 // Color picker input
-const colorPickerLabel = document.querySelector('#color-picker-label');
-const colorPicker = document.querySelector('#color-picker');
+const colorPickerLabel = document.querySelector("#color-picker-label");
+const colorPicker = document.querySelector("#color-picker");
 
 // Background color picker input
-const backgroundColorPickerLabel = document.querySelector('#background-picker-label');
-const backgroundColorPicker = document.querySelector('#background-picker');
+const backgroundColorPickerLabel = document.querySelector(
+  "#background-picker-label"
+);
+const backgroundColorPicker = document.querySelector("#background-picker");
 
 // Mode buttons
-const colorModeButton = document.querySelector('#color-button');
-const rainbowModeButton = document.querySelector('#rainbow-button');
-const toggleGridButton = document.querySelector('#toggle-grid-button');
-const clearButton = document.querySelector('#clear-button');
-const eraseButton = document.querySelector('#eraser-button');
+const colorModeButton = document.querySelector("#color-button");
+const rainbowModeButton = document.querySelector("#rainbow-button");
+const toggleGridButton = document.querySelector("#toggle-grid-button");
+const clearButton = document.querySelector("#clear-button");
+const eraseButton = document.querySelector("#eraser-button");
 // Get a reference to all the buttons to manage their state through the active class
-const modeButtons = document.querySelectorAll('.mode-btn');
+const modeButtons = document.querySelectorAll(".mode-btn");
 
 const DEFAULT_GRID_SIZE = 16; // This creates a default 16 x 16 grid
-const DEFAULT_CELL_COLOR = '#000000';
-const DEFAULT_BACKGROUND_COLOR = '#eeeeee';
-const DEFAULT_GRID_CELL_BORDER = '1px solid #bbb';
+const DEFAULT_CELL_COLOR = "#000000";
+const DEFAULT_BACKGROUND_COLOR = "#eeeeee";
+const DEFAULT_GRID_CELL_BORDER = "1px solid #bbb";
 
-let currentCellColor = ''; // this keeps track of the current color
+let currentCellColor = ""; // this keeps track of the current color
 let currentGridSize = 0;
-let currentBackgroundColor = '';
-let currentGridCellBorder = '';
+let currentBackgroundColor = "";
+let currentGridCellBorder = "";
 
 // this abort controller is used to add/remove event listeners for drawing/erasing
 // This is done by removing the event listeners attached to the grid container every
@@ -67,16 +69,16 @@ function renderGrid(rows, cols) {
   wipeGrid();
 
   for (let row = 0; row < rows; row += 1) {
-    const gridRow = document.createElement('div');
+    const gridRow = document.createElement("div");
 
     for (let col = 0; col < cols; col += 1) {
-      const gridCol = document.createElement('div');
-      gridCol.classList.add('grid-cell');
+      const gridCol = document.createElement("div");
+      gridCol.classList.add("grid-cell");
       gridCol.style.width = `${columnSize}px`;
       gridCol.style.height = `${rowSize}px`;
       gridCol.style.border = currentGridCellBorder;
       gridCol.style.backgroundColor = currentBackgroundColor;
-      gridCol.setAttribute('hovered', false);
+      gridCol.setAttribute("hovered", false);
       gridRow.appendChild(gridCol);
     }
     gridContainer.appendChild(gridRow);
@@ -88,8 +90,8 @@ function renderGrid(rows, cols) {
  * @returns {String} A string representing a color in 6-digit hex notation.
  */
 function generateRandomHexColor() {
-  const values = '0123456789abcdef'; // our values will always fall in this range
-  let resultColor = '#'; // all colors in hex notation start with #
+  const values = "0123456789abcdef"; // our values will always fall in this range
+  let resultColor = "#"; // all colors in hex notation start with #
 
   // we will always be generating 6 values, as that is what the color picker
   // input will always expect. The color picker input does support neither 3-digit
@@ -110,7 +112,7 @@ function drawSolidColor(event) {
   // Change the background color of the specified cell. We no longer have
   // to keep track of when the eraser is on or off, as the behavior is now decoupled.
   event.target.style.backgroundColor = currentCellColor;
-  event.target.setAttribute('hovered', true);
+  event.target.setAttribute("hovered", true);
 }
 
 /**
@@ -123,7 +125,7 @@ function drawRainbowColor(event) {
   // If so, the current background color is used to change the cell color to that
   // of the background.
   event.target.style.backgroundColor = generateRandomHexColor();
-  event.target.setAttribute('hovered', true);
+  event.target.setAttribute("hovered", true);
 }
 
 /**
@@ -132,7 +134,7 @@ function drawRainbowColor(event) {
  */
 function eraseColor(event) {
   event.target.style.backgroundColor = currentBackgroundColor;
-  event.target.setAttribute('hovered', false);
+  event.target.setAttribute("hovered", false);
 }
 
 /**
@@ -146,13 +148,14 @@ function eraseColor(event) {
  * conflict with one another.
  */
 modeButtons.forEach((button) => {
-  button.addEventListener('click', function () {
-    const current = document.querySelector('.active');
+  button.addEventListener("click", function () {
+    const current = document.querySelector(".active");
     if (current) {
-      current.classList.remove('active');
-      this.classList.add('active');
-    } else { // This handles the initial case when none of the mode buttons is active.
-      this.classList.add('active');
+      current.classList.remove("active");
+      this.classList.add("active");
+    } else {
+      // This handles the initial case when none of the mode buttons is active.
+      this.classList.add("active");
     }
   });
 });
@@ -161,7 +164,7 @@ modeButtons.forEach((button) => {
  * This event listener grabs the value from the grid slider
  * and renders a new grid with the specified size when it changes.
  */
-gridSlider.addEventListener('input', (evt) => {
+gridSlider.addEventListener("input", (evt) => {
   currentGridSize = evt.target.value;
   gridValue.textContent = currentGridSize;
 
@@ -172,7 +175,7 @@ gridSlider.addEventListener('input', (evt) => {
  * This color picker label event listener is responsible for capturing the user's
  * click and sending it to the input element that is hidden.
  */
-colorPickerLabel.addEventListener('click', () => {
+colorPickerLabel.addEventListener("click", () => {
   // Because we had to hide the color picker input to override its normal
   // appearance, we need to emulate the click when clicking on the container
   // label.
@@ -182,7 +185,7 @@ colorPickerLabel.addEventListener('click', () => {
 /**
  * This event listener is responsible for setting the painting color.
  */
-colorPicker.addEventListener('input', (evt) => {
+colorPicker.addEventListener("input", (evt) => {
   // set the color to the value specified on the button.
   const selectedColor = evt.target.value;
   colorPickerLabel.style.backgroundColor = selectedColor;
@@ -193,7 +196,7 @@ colorPicker.addEventListener('input', (evt) => {
  * This event listener simulates the clicking of the background color
  * picker input.
  */
-backgroundColorPickerLabel.addEventListener('click', () => {
+backgroundColorPickerLabel.addEventListener("click", () => {
   backgroundColorPicker.click();
 });
 
@@ -201,7 +204,7 @@ backgroundColorPickerLabel.addEventListener('click', () => {
  * This event listener is responsible for changing the background color of the
  * grid to the color specified by the user.
  */
-backgroundColorPicker.addEventListener('input', () => {
+backgroundColorPicker.addEventListener("input", () => {
   const selectedColor = backgroundColorPicker.value;
 
   currentBackgroundColor = selectedColor;
@@ -210,70 +213,78 @@ backgroundColorPicker.addEventListener('input', () => {
   backgroundColorPickerLabel.style.backgroundColor = selectedColor;
 
   // Update the color of all cells that have not been hovered over
-  const gridCells = gridContainer.querySelectorAll('.grid-cell');
+  const gridCells = gridContainer.querySelectorAll(".grid-cell");
   gridCells.forEach((cell) => {
     // We must check against the contents of the value rather than the value itself
     // or the logic check is not evaluated.
-    if (cell.getAttribute('hovered') === 'false') { cell.style.backgroundColor = selectedColor; }
+    if (cell.getAttribute("hovered") === "false") {
+      cell.style.backgroundColor = selectedColor;
+    }
   });
 });
 
 /**
  * This event listener enables the color mode when the Color Mode button is clicked.
  */
-colorModeButton.addEventListener('click', function () {
+colorModeButton.addEventListener("click", function () {
   abortController.abort();
   abortController = new AbortController();
-  const abortEvent = new Event('abort');
+  const abortEvent = new Event("abort");
   this.dispatchEvent(abortEvent);
 });
 
 /**
  * This event listener is triggered after the color mode button triggers the abort event.
  */
-colorModeButton.addEventListener('abort', () => {
-  gridContainer.addEventListener('mouseover', drawSolidColor, { signal: abortController.signal });
+colorModeButton.addEventListener("abort", () => {
+  gridContainer.addEventListener("mouseover", drawSolidColor, {
+    signal: abortController.signal,
+  });
 });
 
 /**
  * This event listener is triggered when Rainbow Mode is clicked on.
  */
-rainbowModeButton.addEventListener('click', function () {
+rainbowModeButton.addEventListener("click", function () {
   abortController.abort();
   abortController = new AbortController();
-  const abortEvent = new Event('abort');
+  const abortEvent = new Event("abort");
   this.dispatchEvent(abortEvent);
 });
 
 /**
  * This event listener is triggered after the abort event is issued by RainbowModeButton
  */
-rainbowModeButton.addEventListener('abort', () => {
-  gridContainer.addEventListener('mouseover', drawRainbowColor, { signal: abortController.signal });
+rainbowModeButton.addEventListener("abort", () => {
+  gridContainer.addEventListener("mouseover", drawRainbowColor, {
+    signal: abortController.signal,
+  });
 });
 
 /**
  * This event listener handles Erase Mode when clicked on.
  */
-eraseButton.addEventListener('click', function () {
+eraseButton.addEventListener("click", function () {
   abortController.abort();
   abortController = new AbortController();
-  const abortEvent = new Event('abort');
+  const abortEvent = new Event("abort");
   this.dispatchEvent(abortEvent);
 });
 
 /**
  * This event listener is triggered as a response to the abort event dispatched by Erase Mode.
  */
-eraseButton.addEventListener('abort', () => {
-  gridContainer.addEventListener('mouseover', eraseColor, { signal: abortController.signal });
+eraseButton.addEventListener("abort", () => {
+  gridContainer.addEventListener("mouseover", eraseColor, {
+    signal: abortController.signal,
+  });
 });
 
 /**
  * This event listener is responsible for clearing out the grid when the
  * clear button is pressed.
-*/
-clearButton.addEventListener('click', () => {
+ */
+clearButton.addEventListener("click", () => {
   // restore default values for the background
   backgroundColorPicker.value = DEFAULT_BACKGROUND_COLOR;
   currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
@@ -283,20 +294,22 @@ clearButton.addEventListener('click', () => {
 /**
  * This event listener toggles the lines on the grid on and off.
  */
-toggleGridButton.addEventListener('click', function () {
-  const gridCells = gridContainer.querySelectorAll('.grid-cell');
+toggleGridButton.addEventListener("click", function () {
+  const gridCells = gridContainer.querySelectorAll(".grid-cell");
 
   // We still want to keep track of the value of this button
   // to know when the grid lines are on or off
-  if (this.value === 'on') {
-    this.value = 'off';
-    currentGridCellBorder = 'none';
+  if (this.value === "on") {
+    this.value = "off";
+    currentGridCellBorder = "none";
   } else {
-    this.value = 'on';
+    this.value = "on";
     currentGridCellBorder = DEFAULT_GRID_CELL_BORDER;
   }
   // once the current style is determined, grab the current cells and change their border style.
-  gridCells.forEach((item) => { item.style.border = currentGridCellBorder; });
+  gridCells.forEach((item) => {
+    item.style.border = currentGridCellBorder;
+  });
 });
 
 /**
@@ -309,7 +322,7 @@ function initWebPage() {
   currentGridSize = DEFAULT_GRID_SIZE;
   currentCellColor = DEFAULT_CELL_COLOR;
   currentBackgroundColor = DEFAULT_BACKGROUND_COLOR;
-  currentGridCellBorder = 'none';
+  currentGridCellBorder = "none";
   gridValue.textContent = DEFAULT_GRID_SIZE;
   renderGrid(currentGridSize, currentGridSize);
 }
