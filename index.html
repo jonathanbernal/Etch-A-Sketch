@@ -1,68 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch A Sketch</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://kit.fontawesome.com/29cf700e75.js" crossorigin="anonymous" defer></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/29cf700e75.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
     <script type="text/javascript" src="index.js" defer></script>
-    
-</head>
-<body class="body">
+  </head>
+  <body class="body">
     <header>
-        <h1>Etch-A-Sketch</h1>
+      <h1>Etch-A-Sketch</h1>
     </header>
-    
+
     <div class="controls-container">
-        <!-- grid slider -->
-        <label for="#grid-slider" class="controls-label" id="grid-slider-label">
-            <p class="label-title">Grid Size</p>
-            <input type="range" min="16" max="100" value="16" id="grid-slider"/>
-            <div class="range-values">
-                <div>16</div>
-                <div class="grid-value"></div>
-                <div>100</div>
-            </div>
+      <!-- grid slider -->
+      <label for="#grid-slider" class="controls-label" id="grid-slider-label">
+        <p class="label-title">Grid Size</p>
+        <input type="range" min="16" max="100" value="16" id="grid-slider" />
+        <div class="range-values">
+          <div>16</div>
+          <div class="grid-value"></div>
+          <div>100</div>
+        </div>
+      </label>
+
+      <div class="color-container">
+        <p>Brush</p>
+        <!-- color picker -->
+        <label for="#color-picker" id="color-picker-label">
+          <input type="color" value="#000000" id="color-picker" />
         </label>
+      </div>
 
-        <div class="color-container">
-            <p>Brush</p>
-                <!-- color picker -->
-            <label for="#color-picker" id="color-picker-label">
-                <input type="color" value="#000000" id="color-picker">
-            </label>
-        </div>
+      <div class="color-container">
+        <p>Background</p>
+        <!-- background color-->
+        <label for="background-picker" id="background-picker-label">
+          <input type="color" value="#eeeeee" id="background-picker" />
+        </label>
+      </div>
 
-        <div class="color-container">
-            <p>Background</p>
-            <!-- background color-->
-            <label for="background-picker" id="background-picker-label">
-                <input type="color" value="#eeeeee" id="background-picker">
-            </label>
-        </div>
+      <!-- color mode is active by default-->
+      <button id="color-button" class="mode-btn">
+        <i class="fa-solid fa-paintbrush"></i>
+      </button>
 
-        <!-- color mode is active by default-->
-        <button id="color-button" class="mode-btn"><i class="fa-solid fa-paintbrush"></i></button>
+      <!-- rainbow color picker-->
+      <button id="rainbow-button" class="mode-btn">
+        <i class="fa-solid fa-rainbow"></i>
+      </button>
 
-        <!-- rainbow color picker-->
-        <button id="rainbow-button" class="mode-btn"><i class="fa-solid fa-rainbow"></i></button>
+      <!-- eraser -->
+      <button id="eraser-button" class="mode-btn">
+        <i class="fa-solid fa-eraser"></i>
+      </button>
 
-        <!-- eraser -->
-        <button id="eraser-button" class="mode-btn"><i class="fa-solid fa-eraser"></i></button>
+      <!-- toggle grid-->
+      <button id="toggle-grid-button" value="off">
+        <i class="fa-sharp fa-solid fa-table-cells"></i>
+      </button>
 
-        <!-- toggle grid-->
-        <button id="toggle-grid-button" value="off"><i class="fa-sharp fa-solid fa-table-cells"></i></i></button>
-
-        <!-- clear button -->
-        <button id="clear-button">Clear</button>  
+      <!-- clear button -->
+      <button id="clear-button">Clear</button>
     </div>
 
     <div class="grid-container"></div>
 
     <footer class="footer">
-        <p>Truly Yours By Jonathan Bernal <a class="fa-brands fa-github" href="https://github.com/jonathanbernal" target="_blank"></a></p>
+      <p>
+        Truly Yours By Jonathan Bernal
+        <a
+          class="fa-brands fa-github"
+          href="https://github.com/jonathanbernal"
+          target="_blank"
+        ></a>
+      </p>
     </footer>
-</body>
+  </body>
 </html>
