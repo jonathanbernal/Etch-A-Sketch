@@ -232,7 +232,6 @@ colorModeButton.addEventListener('click', function () {
  * This event listener is triggered after the color mode button triggers the abort event.
  */
 colorModeButton.addEventListener('abort', () => {
-  console.log('Color Mode activated');
   gridContainer.addEventListener('mouseover', drawSolidColor, { signal: abortController.signal });
 });
 
